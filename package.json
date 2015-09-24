@@ -4,7 +4,6 @@
     "description": "Function to encode data used by pheromon sources ",
     "main": "./index.js",
     "scripts": {
-        "postinstall": "if [ -d .git ]; then cp ./git-hooks/pre-commit ./.git/hooks/pre-commit; chmod a+x ./.git/hooks/pre-commit; fi",
         "lint": "eslint ./",
         "test": "mocha tests/*"
     },
