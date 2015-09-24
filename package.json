@@ -1,0 +1,25 @@
+{
+    "name": "pheromon-codecs",
+    "version": "0.0.1",
+    "description": "Function to encode data used by pheromon sources ",
+    "main": "./index.js",
+    "scripts": {
+        "postinstall": "if [ -d .git ]; then cp ./git-hooks/pre-commit ./.git/hooks/pre-commit; chmod a+x ./.git/hooks/pre-commit; fi",
+        "lint": "eslint ./",
+        "test": "mocha tests/*"
+    },
+    "author": "ants <contact@ants.builders> (http://ants.builders)",
+    "license": "MIT",
+    "dependencies": {
+        "es6-shim": "^0.31.0",
+        "moment": "^2.10.3",
+        "moment-timezone": "^0.3.1",
+        "protocol-buffers": "^3.0.0"
+    },
+    "devDependencies": {
+        "chai": "^2.3.0",
+        "chai-as-promised": "^5.0.0",
+        "mocha": "^2.2.5",
+        "eslint": "^0.21.0"
+    }
+}
