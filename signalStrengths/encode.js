@@ -4,8 +4,6 @@ require('es6-shim');
 var encodeProtoDelta = require('./encodeMeasurement-delta-protobuf');
 var shrinkMeasurementInformation = require('./shrinkMeasurementInformation');
 
-var zlib = require('zlib');
-
 module.exports = function encode(measurement){
 
     return new Promise(function(resolve, reject){
@@ -16,8 +14,9 @@ module.exports = function encode(measurement){
 	    var shrinkedMessage = shrinkMeasurementInformation(measurement);
 	    var delta_protobuf_based_buffer = encodeProtoDelta(shrinkedMessage);
 
-        zlib.deflate(delta_protobuf_based_buffer, function(err, buffer){
-            if(err) reject(err); else resolve(buffer.toString('base64'));
-        });
+	if (delta_protobuf_based_buffer)
+            resolve(delta_protobuf_based_buffer);
+	else
+	    reject("Error in encoding : unknown");
     });
 };
