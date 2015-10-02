@@ -8,15 +8,15 @@ module.exports = function encode(measurement){
 
     return new Promise(function(resolve, reject){
 
-    	if (measurement.date === undefined || measurement.devices === undefined)
-    		reject("Cannot encode this object : wrong format");
+        if (measurement.date === undefined || measurement.devices === undefined)
+            reject("Cannot encode this object : wrong format");
 
-	    var shrinkedMessage = shrinkMeasurementInformation(measurement);
-	    var delta_protobuf_based_buffer = encodeProtoDelta(shrinkedMessage);
+        var shrinkedMessage = shrinkMeasurementInformation(measurement);
+        var delta_protobuf_based_buffer = encodeProtoDelta(shrinkedMessage);
 
-	if (delta_protobuf_based_buffer)
+    if (delta_protobuf_based_buffer)
             resolve(delta_protobuf_based_buffer);
-	else
-	    reject("Error in encoding : unknown");
+    else
+        reject("Error in encoding : unknown");
     });
 };
