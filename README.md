@@ -1,5 +1,8 @@
 # pheromon-codecs
-Function to encode data used by [pheromon](https://github.com/anthill/pheromon) sources
+
+[![Build Status](https://travis-ci.org/anthill/pheromon-codecs.svg)](https://travis-ci.org/anthill/pheromon-codecs)
+
+Function to encode data used by [pheromon](https://github.com/anthill/pheromon) sources.
 
 ## List of available codecs
 
@@ -48,7 +51,7 @@ This codec allows to encode trajectories matching this pattern :
 ]
 ```
 
-It is used in [6sense](https://github.com/anthill/6sense) in order to send all trajectories of all devices everyday.
+It is used in [6sense](https://github.com/anthill/6sense) in order to send all trajectories of all devices seen everyday.
 
 ## License
 
