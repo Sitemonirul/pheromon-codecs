@@ -9,8 +9,8 @@ var ESCAPE_VALUE = 0x08; // -8 in 4bit signed binary
 */
 
 module.exports = function(values){
-    // allocate a buffer purposefully too big
-    var buffer = new Buffer(2*values.length);
+    // allocate a buffer purposefully too big (REALLY too big, for varInts)
+    var buffer = new Buffer(8*values.length);
     var nextIndex = 0;
     var byteBeingBuilt;
     var previousValue; // undefined indicates next values should be written in full, not delta

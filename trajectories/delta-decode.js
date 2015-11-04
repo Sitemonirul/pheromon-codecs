@@ -61,5 +61,10 @@ module.exports = function(buffer){
 
     });
 
+    if (tmpVarInt.length) {
+        var value = varInt.decode(new Buffer(tmpVarInt));
+        arr.push(value);
+    }
+
     return arr;
 };

@@ -28,11 +28,6 @@ describe('trajectories', function() {
                 {
                     date: new Date(Math.floor(new Date().getTime() / 60000) * 60000),
                     signal_strength: -40
-                },
-
-                {
-                    date: new Date(Math.floor(new Date().getTime() / 60000) * 60000 + 30000),
-                    signal_strength: -30
                 }
             ]
         ];

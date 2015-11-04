@@ -39,7 +39,7 @@ module.exports = function encode(trajectories) {
         else {
             var shrinked = shrinker(trajectories);
 
-            var deltaEncoded = shrinked.map(function (trajectory) { // [{dates, signal_strengths}, ...]
+            var deltaEncoded = shrinked.map(function (trajectory) { // [{date, signal_strength}, ...]
 
                 var dates = trajectory.map(function (measurement) {
                     return measurement.date;
@@ -49,7 +49,7 @@ module.exports = function encode(trajectories) {
                     return measurement.signal_strength;
                 });
 
-                return {
+                return { // [{dates, signal_strength}]
                     dates: deltaEncoder(dates),
                     signal_strengths: deltaEncoder(signal_strengths)
                 };
