@@ -1,6 +1,6 @@
 {
     "name": "pheromon-codecs",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "Function to encode data used by pheromon sources ",
     "main": "./index.js",
     "scripts": {
