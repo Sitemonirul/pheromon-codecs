@@ -4,5 +4,5 @@ message deviceTrajectory {
 }
 
 message trajectories {
-    repeated deviceTrajectory trajectories = 1 [packed=true];
+    repeated deviceTrajectory trajectories = 4;
 }
