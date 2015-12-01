@@ -13,7 +13,7 @@ function shrinkSignal(sig) {
     return Math.round(Math.max(sig - MIN_SIGNAL_STRENGTH, 0) / PRECISION_SIGNAL_STRENGTH);
 }
 
-// Shrink measurements (and deleted useless points)
+// Shrink measurements (and deleted useless measurements)
 module.exports = function shrink (trajectories) {
     return trajectories.map(function (trajectory) {
 
