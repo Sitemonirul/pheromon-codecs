@@ -24,7 +24,6 @@ module.exports = function shrink (trajectories) {
             if (!filtered.slice(-1)[0])
                 filtered.push(measurement);
             else {
-                console.log((measurement.date.getTime() - filtered.slice(-1)[0].date.getTime()) / 1000);
                 if (((measurement.date.getTime() - filtered.slice(-1)[0].date.getTime()) / 1000 >= PRECISION_DATE) &&
                     (Math.abs(measurement.signal_strength - filtered.slice(-1)[0].signal_strength) >= PRECISION_SIGNAL_STRENGTH))
                     filtered.push(measurement);
