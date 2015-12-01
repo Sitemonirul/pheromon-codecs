@@ -13,9 +13,27 @@ function shrinkSignal(sig) {
     return Math.round(Math.max(sig - MIN_SIGNAL_STRENGTH, 0) / PRECISION_SIGNAL_STRENGTH);
 }
 
+// Shrink measurements (and deleted useless points)
 module.exports = function shrink (trajectories) {
     return trajectories.map(function (trajectory) {
-        return trajectory.map(function (measurement) {
+
+        var filtered = [];
+
+        // Deleted measurements with a date delta or signal delta too low.
+        trajectory.forEach(function (measurement) {
+            if (!filtered.slice(-1)[0])
+                filtered.push(measurement);
+            else {
+                console.log((measurement.date.getTime() - filtered.slice(-1)[0].date.getTime()) / 1000);
+                if (((measurement.date.getTime() - filtered.slice(-1)[0].date.getTime()) / 1000 >= PRECISION_DATE) &&
+                    (Math.abs(measurement.signal_strength - filtered.slice(-1)[0].signal_strength) >= PRECISION_SIGNAL_STRENGTH))
+                    filtered.push(measurement);
+            }
+        });
+
+        // shrink
+        return trajectory
+        .map(function (measurement) {
             return {
                 date: shrinkDate(measurement.date),
                 signal_strength: shrinkSignal(measurement.signal_strength)
