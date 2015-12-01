@@ -1,5 +1,5 @@
 message AffluenceSensorMeasurement {
   required uint32 date = 1;
   required bytes signal_strengths = 2 [packed=true];
-  repeated float variances = 3 [packed=true];
+  optional bytes stds = 3 [packed=true];
 }

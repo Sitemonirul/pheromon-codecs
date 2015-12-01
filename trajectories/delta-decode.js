@@ -18,6 +18,10 @@ function fourBitSigned(nb) { // Set the value of the 4th less significant bit to
 }
 
 module.exports = function(buffer){
+
+    if (!buffer || !buffer.length)
+        return undefined;
+
     var arr = [];
     var previousValue;
     var tmpVarInt = [];

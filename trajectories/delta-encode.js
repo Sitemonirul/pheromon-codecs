@@ -9,6 +9,10 @@ var ESCAPE_VALUE = 0x08; // -8 in 4bit signed binary
 */
 
 module.exports = function(values){
+
+    if (!values || !values.length)
+        return undefined;
+
     // allocate a buffer purposefully too big (REALLY too big, for varInts)
     var buffer = new Buffer(8*values.length);
     var nextIndex = 0;
@@ -17,6 +21,9 @@ module.exports = function(values){
     var vint;
     
     values.forEach(function(v){
+        if (isNaN(v) || v === undefined || v === null)
+            return undefined;
+
         if (previousValue === undefined){
             vint = varInt.encode(v);
 

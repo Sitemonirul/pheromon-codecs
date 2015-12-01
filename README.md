@@ -18,7 +18,7 @@ This codec allows to encode measurements matching this pattern :
   [ 
     {
       signal_strength: int,
-      variance: float // variance is optionnal
+      std: int // standard deviation
     },
     ...
   ] 

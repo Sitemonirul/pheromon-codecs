@@ -6,4 +6,4 @@ var decode = require('./decode.js');
 module.exports = {
 	encode: encode,
 	decode: decode
-}
+};
