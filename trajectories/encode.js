@@ -31,13 +31,18 @@ function isCorrectFormat(trajectories) {
     return true;
 }
 
+// trajectories : trajectories to encode
+// options : {minDateUnixTimestamp: integer, 
+//            minSignalStrength: integer in dB,
+//            precisionSignalStrength: integer in dB,
+//            precisionDate: integer in seconds}
 
-module.exports = function encode(trajectories) {
+module.exports = function encode(trajectories, options) {
     return new Promise(function (resolve, reject) {
         if (!isCorrectFormat(trajectories))
             reject(new Error('Encoding error, format not correct'));
         else {
-            var shrinked = shrinker(trajectories);
+            var shrinked = shrinker(trajectories, options);
 
             var deltaEncoded = shrinked.map(function (trajectory) { // [{date, signal_strength}, ...]
 
