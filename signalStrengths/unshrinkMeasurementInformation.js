@@ -17,12 +17,12 @@ module.exports = function unshrinkMeasurementInformation(measurement){
     
     // Unshrink signal strengths
     var devices = measurement.devices.map(function (device) {
-        device.signal_strength = fromByte(device.signal_strength)
+        device.signal_strength = fromByte(device.signal_strength);
         return device;
-    })
+    });
 
     return {
-        date: unshrinkedDate,
+        date: new Date(unshrinkedDate),
         devices: devices
     };
 };

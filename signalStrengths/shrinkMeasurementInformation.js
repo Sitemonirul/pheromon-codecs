@@ -33,7 +33,7 @@ module.exports = function shrinkMeasurementInformation(measurement){
     var devices = devices.map(function (device) {
         return {
             signal_strength: toByte(device.signal_strength),
-            ID: device.ID
+            variance: device.variance
         };
     });
 

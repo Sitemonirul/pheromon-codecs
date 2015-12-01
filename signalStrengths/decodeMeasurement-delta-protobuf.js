@@ -18,7 +18,7 @@ module.exports = function(buffer){
     var devices = signal_strengths.map(function (signal_strength, index) {
         return {
             signal_strength: signal_strength,
-            ID: measurement.IDs[index]
+            variance: measurement.variances[index]
         };
     });
 

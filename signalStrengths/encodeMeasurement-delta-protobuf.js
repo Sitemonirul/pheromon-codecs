@@ -10,8 +10,8 @@ var message = protobuf(fs.readFileSync(path.join(__dirname, '/delta-encoded-meas
 
 module.exports = function(measurement){
 
-    var IDs = measurement.devices.map(function (device) {
-        return device.ID;
+    var variances = measurement.devices.map(function (device) {
+        return device.variance;
     });
 
     var signal_strengths = measurement.devices.map(function (device) {
@@ -21,6 +21,6 @@ module.exports = function(measurement){
     return message.AffluenceSensorMeasurement.encode({
         date: measurement.date,
         signal_strengths: deltaEncode(signal_strengths),
-        IDs: IDs
+        variances: variances
     });
 };
