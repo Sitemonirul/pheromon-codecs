@@ -9,7 +9,7 @@ chai.use(chaiAsPromised);
 
 describe('signalStrengths', function() {
 
-    it('should encode and decode measurement', function() {
+    it('should encode and decode measurement with standard deviation', function() {
 
         var measurement = 
         {
@@ -18,11 +18,11 @@ describe('signalStrengths', function() {
             [
                 {
                     signal_strength: -79,
-                    ID: 42
+                    std: 42.5
                 },
                 {
                     signal_strength: -30,
-                    ID: 12
+                    std: 0
                 }
             ]
         };
@@ -33,7 +33,48 @@ describe('signalStrengths', function() {
             return signalStrengthsCodec.decode(encoded)
             .then(function (decoded) {
 
-                expect(JSON.stringify(decoded)).to.be.equal(JSON.stringify(measurement));
+                expect(decoded.date.toString()).to.deep.equal(measurement.date.toString());
+                measurement.devices.forEach(function (device, index) {
+                    expect(decoded.devices[index].signal_strength).to.be.deep.equal(device.signal_strength);
+                    if (device.std !== undefined)
+                        expect(Math.abs(decoded.devices[index].std - device.std)).to.be.most(0.5);
+                    else
+                        expect(decoded.devices[index].std).to.be.undefined;
+                });
+            });
+        });
+    });
+
+    it('should encode and decode measurement without standard deviation', function() {
+
+        var measurement = 
+        {
+            date: new Date(Math.floor(new Date().getTime() / 60000) * 60000),
+            devices:
+            [
+                {
+                    signal_strength: -79
+                },
+                {
+                    signal_strength: -30
+                }
+            ]
+        };
+
+        return signalStrengthsCodec.encode(measurement)
+        .then(function (encoded) {
+
+            return signalStrengthsCodec.decode(encoded)
+            .then(function (decoded) {
+
+                expect(decoded.date.toString()).to.deep.equal(measurement.date.toString());
+                measurement.devices.forEach(function (device, index) {
+                    expect(decoded.devices[index].signal_strength).to.be.deep.equal(device.signal_strength);
+                    if (device.std !== undefined)
+                        expect(Math.abs(decoded.devices[index].std - device.std)).to.be.most(0.5);
+                    else
+                        expect(decoded.devices[index].std).to.be.undefined;
+                });
             });
         });
     });

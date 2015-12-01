@@ -11,7 +11,13 @@ var deltaDecoder = require('./delta-decode');
 var message = protobuf(fs.readFileSync(path.join(__dirname, '/delta-encoded-measurement.proto')));
 
 
-module.exports = function decode(buffer) {
+// trajectories : trajectories to encode
+// options : {minDateUnixTimestamp: integer, 
+//            minSignalStrength: integer in dB,
+//            precisionSignalStrength: integer in dB,
+//            precisionDate: integer in seconds}
+
+module.exports = function decode(buffer, options) {
 
     return new Promise(function (resolve, reject) {
         var unprotobuffed = message.trajectories.decode(buffer);
@@ -36,6 +42,6 @@ module.exports = function decode(buffer) {
             return rebuiltObj;
         });
 
-        resolve(unshrinker(deltaDecoded));
+        resolve(unshrinker(deltaDecoded, options));
     });
 };
