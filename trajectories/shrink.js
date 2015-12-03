@@ -34,13 +34,15 @@ module.exports = function shrink (trajectories, options) {
                 filtered.push(measurement);
             else {
                 if (((measurement.date.getTime() - filtered.slice(-1)[0].date.getTime()) / 1000 >= PRECISION_DATE) &&
-                    (Math.abs(measurement.signal_strength - filtered.slice(-1)[0].signal_strength) >= PRECISION_SIGNAL_STRENGTH))
+                    (Math.abs(measurement.signal_strength - filtered.slice(-1)[0].signal_strength) >= PRECISION_SIGNAL_STRENGTH)) {
+
                     filtered.push(measurement);
+                }
             }
         });
 
         // shrink
-        return trajectory
+        return filtered
         .map(function (measurement) {
             return {
                 date: shrinkDate(measurement.date, MIN_DATE_UNIX_TIMESTAMP, PRECISION_DATE),
