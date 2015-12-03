@@ -206,6 +206,53 @@ it('should encode and decode measurement (harder)', function() {
     });
 });
 
+
+it('should delete useless measurements', function () {
+
+  var opts = {
+    precisionSignalStrength: 2,
+    precisionDate: 30
+  };
+
+  var measurements = [
+    [
+      {date: new Date("2015-12-02T15:18:30.000Z"), signal_strength: -68},
+      {date: new Date("2015-12-02T15:18:30.000Z"), signal_strength: -64},
+      {date: new Date("2015-12-02T15:18:30.000Z"), signal_strength: -71},
+      {date: new Date("2015-12-02T15:20:30.000Z"), signal_strength: -70},
+      {date: new Date("2015-12-02T15:35:00.000Z"), signal_strength: -60}
+    ],
+    [
+      {date: new Date("2015-12-02T15:59:30.000Z"), signal_strength: -68},
+      {date: new Date("2015-12-02T15:59:40.000Z"), signal_strength: -60},
+      {date: new Date("2015-12-02T15:59:50.000Z"), signal_strength: -65},
+      {date: new Date("2015-12-02T16:00:00.000Z"), signal_strength: -64},
+      {date: new Date("2015-12-02T17:00:30.000Z"), signal_strength: -63}
+    ]
+  ];
+
+  var correct = [
+    [
+      {date: new Date("2015-12-02T15:18:30.000Z"), signal_strength: -68},
+      {date: new Date("2015-12-02T15:20:30.000Z"), signal_strength: -70},
+      {date: new Date("2015-12-02T15:35:00.000Z"), signal_strength: -60}
+    ],
+    [
+      {date: new Date("2015-12-02T15:59:30.000Z"), signal_strength: -68},
+      {date: new Date("2015-12-02T16:00:00.000Z"), signal_strength: -64}
+    ]
+  ];
+
+  return trajectoriesCodec.encode(measurements, opts)
+  .then(function (encoded) {
+    return trajectoriesCodec.decode(encoded, opts)
+    .then(function (decoded) {
+      expect(JSON.stringify(decoded)).to.be.equal(JSON.stringify(correct));
+      });
+  });
+});
+
+
     it('should return an error if trying to encode something wrong', function() {
         var promise1 = trajectoriesCodec.encode(1);
         var promise2 = trajectoriesCodec.encode([1, 2, 3]);
