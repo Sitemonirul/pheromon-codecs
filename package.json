@@ -1,6 +1,6 @@
 {
     "name": "pheromon-codecs",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "description": "Function to encode data used by pheromon sources ",
     "main": "./index.js",
     "scripts": {
@@ -13,7 +13,7 @@
         "es6-shim": "^0.31.0",
         "moment": "^2.10.3",
         "moment-timezone": "^0.3.1",
-        "protocol-buffers": "^3.0.0"
+        "protocol-buffers": "3.1.4"
     },
     "devDependencies": {
         "chai": "^2.3.0",
